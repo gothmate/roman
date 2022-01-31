@@ -1,0 +1,300 @@
+@use 'variables'
+
+@mixin space($t, $r, $b, $l)
+  padding: $t $r $b $l
+
+@mixin hamburguer
+  content: ''
+  position: absolute
+  width: 100%
+  height: 4px
+  background: #fff
+
+*
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+body
+  font-family: 'Roboto', sans-serif
+  background: variables.$primaryGray
+  color: #fff
+header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 28px 18.5%
+
+nav
+  display: flex
+  align-items: center
+  & ul
+    display: flex
+  & li
+    list-style: none
+    margin: 0 20px
+  & a
+    font-family: 'Montserrat', sans-serif
+    text-decoration: none
+    color: #fff
+  & img
+    margin-right: 82px
+main
+  @include space(0, 18.5%, 0, 18.5%)
+  height: 513px
+  text-align: center
+  padding-top: 169px
+  background: variables.$mainGray
+  p
+    font-family: 'Montserrat', sans-serif
+    max-width: 647px
+    margin: 0 auto
+    margin-top: 14px
+    width: 70%
+
+.security-cards
+  & h2
+    margin-top: 97px
+    font-family: 'Roboto', sans-serif
+    font-size: 24px
+    text-align: center
+  & .container-security
+    @include space(28px, 18.5%, 0, 18.5%)
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 30px
+  & .block
+    display: flex
+    flex-direction: column
+    align-items: center
+    & img
+      padding: .8rem 1rem
+      background: variables.$blood
+      border-radius: 50%
+    & h3
+      font-size: 24px
+      margin-top: 9px
+    & p
+      text-align: center
+      font-family: 'Montserrat', sans-serif
+      font-size: 13px
+h3
+  text-align: center
+  font-size: 24px
+
+.products
+  @include space(28px, 18.5%, 0, 18.5%)
+  display: flex
+  // flex: 1
+  flex-wrap: wrap
+  justify-content: space-between
+
+  & h4
+    font-size: 24px
+  & .block-compra
+    max-width: 262px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    background: variables.$tertiaryGray
+    margin-bottom: 20px
+    & img
+      width: 262px
+    & p
+      font-family: 'Montserrat', sans-serif
+      font-size: 10px
+      margin: 6px
+    & span
+      font-family: 'Montserrat', sans-serif
+      font-size: 14px
+      margin-right: 75%
+      margin-top: 10px
+      margin-left: 10px
+    & .divider
+      width: 90%
+      height: 2px
+      margin: 22px
+      background: #fff
+    & button
+      font-size: 14px
+      font-family: 'Roboto', sans-serif
+      border: none
+      background: variables.$blood
+      padding: 6px 32px
+      border-radius: 30px
+
+.questions
+  @include space(118px, 18.5%, 28px, 18.5%)
+  .title
+    display: flex
+    flex-direction: column
+    align-items: center
+  #balloon
+    margin: 0 auto 12px
+  .question-container
+    display: grid
+    grid-gap: 30px
+    grid-template-columns: repeat(2, 1fr)
+    align-items: stretch
+    margin-top: 108px
+    & .block-texto
+      display: flex
+      align-items: center
+      max-width: 417px
+      & img
+        padding: 9px
+        width: 32px
+        border-radius: 50%
+        margin-right: 19px
+        background: variables.$blood
+      .texto
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        h3
+          text-align: left
+          font-size: 16px
+          font-weight: 400
+        p
+          margin: 5px 0
+          font-family: 'Montserrat', sans-serif
+          font-size: 10px
+          max-width: 216px
+
+footer
+  margin-top: 93px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 0 18.5% 28px
+  background: variables.$primaryGray
+  .cards
+    display: flex
+    justify-content: center
+    & img
+      margin-bottom: 29px
+  & p
+    text-align: center
+    margin-bottom: 12px
+  & a
+    text-decoration: none
+    color: #fff
+
+@media ( max-width: 1280px )
+  .security-cards
+    & .container-security
+      grid-template-columns: repeat(2, 1fr)
+
+  .products
+    justify-content: center
+    gap: 30px
+
+@media ( max-width: 850px )
+
+  #nav
+    visibility: hidden
+    position: absolute
+
+  nav
+    & img
+      position: absolute
+      right: 0
+    & .hamburguer_container
+      position: absolute
+      display: flex
+      align-items: center
+      right: 150px
+      top: 43px
+      width: 32px
+      height: 32px
+      & .hamburguer
+        position: relative
+        z-index: 101
+        width: 100%
+        height: 4px
+        background: #fff
+        &:hover
+          cursor: pointer
+        &::before
+          @include hamburguer
+          top: -10px
+        &::after
+          @include hamburguer
+          bottom: 20px
+        & .animate
+          position: absolute
+          top: 0
+          @include hamburguer
+          z-index: 100
+          background: transparent
+          &::before
+            @include hamburguer
+            top: -8px
+            right: 0
+            animation: animateC 700ms forwards
+          &::after
+            @include hamburguer
+            top: 8px
+            right: 0
+            animation: animateCC 700ms forwards
+
+  @keyframes animateC
+    0%
+      transform: rotate(0deg)
+    100%
+      transform: rotate(45deg)
+      top: 0
+
+  @keyframes animateCC
+    0%
+      transform: rotate(0deg)
+    100%
+      transform: rotate(-45deg)
+      top: 0
+
+  #modal
+    position: absolute
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background: variables.$primaryGray
+    display: flex
+    flex: 1
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    & .links
+      margin: 2rem 0
+      text-decoration: none
+      font-size: 2rem
+      font-family: 'Roboto', sans-serif
+      color: #fff
+    & .disable
+      cursor: none
+      pointer-events: none
+
+  main
+    .logotipo
+      max-width: 90%
+
+  footer
+    padding: 0
+    width: 100vw
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+@media ( max-width: 720px )
+
+  .security-cards
+    & .container-security
+      grid-template-columns: 1fr
+
+  .questions
+    .question-container
+      grid-template-columns: 1fr
+
+  .products
+    justify-content: center
